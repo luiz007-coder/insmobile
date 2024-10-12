@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[INS] - Central de Aplicações Mobile</title>
+    <link rel="shortcut icon" href="https://www.habbo.com.br/habbo-imaging/badge/b09064s43131s50134s17113s171153f3edc7f555be912c2392e285b05bd34.gif" type="image/gif">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>       
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #003366;
+        }
+
+        .title-container {
+            position: relative;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .title-image {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: auto;
+            z-index: 1;
+        }
+
+        h1 {
+            margin-top: 20px;
+            z-index: 0;
+            color: white;
+        }
+        #menu {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #menu select {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #f8f8ff;
+            border: 1px solid #ccc;
+        }
+
+        
+        #texto {
+            padding: 5px;
+            border: 1px solid #fff;
+            text-align: left;
+            border-radius: 5px;
+            background-color: #f8f8ff;
+            max-width: 100%;
+            white-space: pre-line;
+        }
+        .versao-app {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #003366;
+            padding: 2px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #ccc;
+        }
+        .botao-copiar {
+            background-color: #0047ab;
+            border: none;
+            color: white;
+            padding: 2px 4px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 11px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-left: 10px;
+        }
+        .botao-copiar:hover {
+            background-color: #0047ab;
+        }
+        .botao-copiar:active {
+            animation: pulse 1s;
+        }
+        .copiado:before {
+            content: 'Copiado!';
+            margin-right: 5px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        #creditos {
+            text-align: center;
+            font-size: 13px;
+            margin-top: 20px;
+            color: #ccc;
+        }
+        .nome-idealizador {
+            margin-bottom: 5px;
+            display: block;
+            color: #ccc;
+        }
+
+        .nome-desenvolvedor {
+            margin-bottom: 5px;
+            display: block;
+            color: #ccc;
+
+        }
+
+        .nick {
+            animation: rainbow 7s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% {
+        color: red;
+    }
+
+    14% {
+        color: orange;
+    }
+
+    28% {
+        color: yellow;
+    }
+
+    42% {
+        color: green;
+    }
+
+    56% {
+        color: blue;
+    }
+
+    70% {
+        color: indigo;
+    }
+
+    84% {
+        color: violet;
+    }
+
+    100% {
+        color: red;
+    }
+        }
+        .descricao {
+            font-style: italic;
+            color: #0047ab;
+            margin-top: 5px;
+            font-size: 7px;
+        }
+        span.texto-principal {
+            font-size: 7px;
+        }
+
+        #welcome-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #2e2e2e;
+            color: #ffffff;
+            padding: 11px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 65%;
+            z-index: 9999;
+        }
+
+        #welcome-card p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        #welcome-card strong {
+            font-weight: bold;
+        }
+
+        #ok-button {
+            background-color: #0047ab;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #ok-button:hover {
+            background-color: #0047ab;
+        }
+
+        #ok-button:active {
+            transform: scale(0.95);
+        }
+
+        #clock {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 9px;
+            border-radius: 10px;
+            background-color: #003366;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            font-size: 12px;
+            color: #ccc;
+        }
+
+    </style>
+</head>
+<body>
+    <p id="clock"></p>
+    <div class="versao-app">0.1</div>
+    <div class="title-container">
+        <img class="title-image" src="https://www.habbo.com.br/habbo-imaging/badge/b09064s43131s50134s17113s171153f3edc7f555be912c2392e285b05bd34.gif" alt="Badge">
+        <h1>[INS] - Central de Aplicações Mobile</h1>
+    </div>
+    <div id="welcome-card">
+        <p>BEM-VINDO(A)!</p>
+        <p>Este programa foi feito especialmente para facilitar o envio de script para usuários mobiles.</p>
+        <p>Para uma melhor experiência, use na horizontal.</p>
+        <p>Quaisquer dúvidas e erros, contate .Lord.</p>
+        <button id="ok-button">OK</button>
+    </div>
+    <div id="menu">
+        <select id="seletor">
+            <option value="CURSO">Script</option>
+            <option value="CFSD">CFSd</option>
+            <option value="CFC1">CFC-I</option>
+            <option value="CFC2">CFC-II</option>
+        </select>
+        <select id="tipoConteudo">
+            <option value="ESCOLHA">Opção</option>
+            <option value="INTRODUCAO">Introdução</option>
+            <option value="JOGO">Pelo Habbo</option>
+            <option value="SLIDE">Pelo Slide</option>
+            <option value="FINALIZACAO">Finalização</option>
+            <option value="POSTAGEM">Postagem</option>
+        </select>
+    </div>
+
+    <div id="conteudo">
+        <div id="texto">Escolha o script da aula e boa aplicação!</div>
+    </div>
+
+    <div id="creditos">
+        <span class="nome-idealizador">Idealizado por ofranco6830 & -Monteiro.</span>
+        <span class="nome-desenvolvedor"><span class="nick"><i class="fa-solid fa-code"></i></span> Desenvolvido por <span class="nick">.Lord</span></span>
+        <span class="nome-idealizador">© Todos os direitos reservados à Companhia dos Instrutores</span>
+    </div>
+
+    <script>
+        var scripts = {
+            CFSD: { 
+
+                INTRODUCAO: [
+                { texto: "Olá, recruta. Eu sou o(a) instrutor(a) que aplicará sua aula inicial." },
+                { texto: "Seja bem-vindo(a) à RCC! Permaneça em silêncio e preste atenção ao conteúdo repassado na instrução." },
+                { texto: "Se eu sair do jogo, me aguarde 5 minutos e caso eu não retorne, volte para o batalhão." },
+                { texto: "Entendido, recruta?" },
+                { texto: "A Polícia Militar Revolução Contra o Crime (RCC) agradece por ter escolhido essa grande família." },
+                { texto: "A RCC foi fundada em 2007 com o objetivo de acabar com o crime no Habbo, por nabas704" },
+                { texto: "(atual nabas201). Atualmente, outro de seus objetivos é o de formar líderes exemplares." },
+                { texto: "Os supremos são os senhores: -Edhone / Mine315-BAN / douglasfon71 (eles são autoridade máxima)." },
+                { texto: "<hr>[FORMA DE TRATAMENTO]" },
+                { texto: "Na RCC, nós temos uma relação entre superiores e inferiores/pares, sendo que:", descricao: "➥ Destaque os trechos que serão perguntados no teste teórico" },
+                { texto: "A forma correta de se dirigir a um SUBALTERNO (inferior)/PAR é: [Patente/Cargo] + [Nick]." },
+                { texto: "A forma correta de se dirigir a um SUPERIOR hierárquico é: Senhor(a) + [Patente/Cargo] + [Nick]." },
+                { texto: "Portanto, com superiores de patente/cargo, utilize sempre o pronome 'senhor(a)'.", descricao: "➥ A partir de agora cobre o pronome 'senhor(a)' do recruta, caso ele não o use corretamente" },
+                { texto: "<hr>[ATENDIMENTO]" },
+                { texto: "Como soldado, sua função será o alistamento de civis, portanto, atente-se às orientações." },
+                { texto: "A MISSÃO do recruta deverá estar toda em BRANCO, com o espaço completamente VAZIO." },
+                { texto: "A farda do recruta deverá ser toda preta (HC ou não HC). O civil não poderá entrar com boina," },
+                { texto: "acessórios, barba ou rosto com barba, número nas costas, e o balão de fala deve ser da cor branca." },
+                { texto: "O recruta deve favoritar o grupo da 'Polícia RCC', os donos são os senhores supremos e RCCEmblemas." },
+                { texto: "Se o recruta estiver na versão BETA, basta juntar-se ao grupo, sem a necessidade de favoritar." },
+                { texto: "É proibida a entrada de recruta/policial com grupo de outra organização militar/polícia." },
+                { texto: "Também são proibidos grupos que vão contra a Habbo Etiqueta (regras do Habbo Hotel)." },
+                { texto: "Ademais, proíbe-se a entrada de civis que apresentem o perfil sem visibilidade ou offline." },
+                { texto: "Portanto, é obrigatório que o civil porte os três requisitos: MISSÃO, FARDA e GRUPO." },
+                { texto: "Ao avistar um superior na recepção, você tem o dever de assumi-lo na função." },
+                { texto: "Deixe um quadrado entre você e o superior que irá assumir e diga: Assumo, senhor(a)." },
+                { texto: "Caso precise sair ou pedir ajuda, acene que um policial com balão de fala vermelho irá te ajudar." },
+                { texto: "Alguma dúvida?" },
+                { texto: "<hr>[TESTE TEÓRICO]" },
+                { texto: "Agora, irei fazer algumas perguntas relacionadas à aula. Caso erre duas questões, será reprovado(a)." },
+                { texto: "Vocês conseguem sussurrar comigo?", descricao: "➥ Caso haja mais de um recruta." },
+                { texto: "Todas as respostas deverão ser enviadas via sussurro, caso envie fora será considerado um erro." },
+                { texto: "Clique no meu avatar e digite 'Sussurrar', dê um espaço e envie uma mensagem após isso.", descricao: "➥ Caso não consigam sussurrar / Caso o recruta atinja a quantidade de erros, deverá ser reprovado imediatamente. Caso tenha outros, aguarde o reprovado retirar-se para dar continuidade." },
+                { texto: "1) Quais são os 3 requisitos necessários para o alistamento?", descricao: "R: Missão, grupo e farda." },
+                { texto: "2) Qual pronome deve ser utilizado ao se dirigir a SUPERIORES de patente/cargo?", descricao: "R: Senhor(a)" },
+                { texto: "3) Como deve estar a missão de um recruta?", descricao: "R: Em branco/vazia." },
+                { texto: "4) Qual é a forma correta de assumir um superior na recepção?", descricao: "R: Estando a um quadrado de distância de sua cadeira e falando: 'Assumo, senhor/senhora'." },
+                { texto: "Lamento, você está reprovado(a). Mas não desista, retorne ao batalhão e aliste-se novamente." },
+                { texto: "Para isso, pesquise no navegador de quartos por RCC e entre no primeiro quarto da lista." },
+                { texto: "Confio no seu potencial e sei que é capaz de ser aprovado(a)!" },
+                { texto: "<hr>[COMANDOS]" },
+                { texto: "Você conhece todos os comandos utilizados em nossa polícia?", descricao: "➥ Se TODOS os alunos afirmarem saber TODOS os comandos, realize apenas a prática de cada um deles. Caso o recruta erre algum comando, é necessário ensiná-lo a como executar o comando corretamente." },
+                { texto: "Na RCC, existem 8 comandos. Irei explicar alguns e, logo em seguida, praticaremos sua execução.", descricao: "➥ PRATIQUE CADA COMANDO LOGO APÓS EXPLICÁ-LO, ANTES DE PROSSEGUIR AO PRÓXIMO" },
+                { texto: "1. Sentido: Nesse comando você deverá dar um passo à frente." },
+                { texto: "Enquanto estiver no comando sentido, permaneça em silêncio, reto e imóvel." },
+                { texto: "2. Continência: Nesse comando você deverá acenar uma única vez. Dica: Envie 'o/'." },
+                { texto: "3. Apresentar armas: Nesse comando você deverá acenar sem parar," },
+                { texto: "devendo parar somente quando for dado o comando 'sentido'. Dica: Envie 'o/' a cada 3 segundos." },
+                { texto: "4. Marcar passos: Nesse comando você deverá dançar hap-hop sem sair do local." },
+                { texto: "Poderá parar quando for dado 'sentido' novamente. Clique em parar de dançar para parar." },
+                { texto: "5. Silêncio: Nesse comando não é permitido que você fale, nem responda perguntas sem permissão." },
+                { texto: "6. À vontade: Nesse comando você estará livre para retornar ao que estava fazendo." },
+                { texto: "Os dois comandos restantes (apresente-se e dispensado) serão ensinados em um dos cursos de soldado.", descricao: "➥ Após praticar/ensinar os comandos com o recruta retome o script a partir daqui" },
+                { texto: "<hr>[NEGRITO]" },
+                { texto: "Você já sabe falar em negrito?", descricao: "➥ Caso o recruta já esteja falando em negrito, retome o script no tópico FINALIZAÇÃO." },
+                { texto: "Você está jogando pelo computador ou pela versão mobile?", descricao: "➥ Caso não saiba utilizar o negrito." },
+                { texto: "Digite 'Teste' e pressione o shift juntamente com o enter para enviar.", descricao: "➥ Caso o recruta esteja pelo PC ou notebook:" },
+                { texto: "Clique no lado esquerdo do local da fala. Feito isso, onde tem escrito 'fale', troque por 'Gritar'." },
+                { texto: "Caso esteja na nova versão do jogo, tente enviar mensagens com '':shout' no início de suas falas.", descricao: "➥ Caso o recruta esteja pelo tablet ou celular:" },
+                { texto: "Lembrando que a utilização do negrito é indispensável nas dependências da instituição.", descricao: "➥ Vá para o tópico FINALIZAÇÃO." },
+            ],
+                FINALIZACAO: [
+                   
+                    { texto: "[FINALIZAÇÃO]" },
+                    { texto: "Meus parabéns, você foi aprovado(a) no Curso de Formação de Soldados!", descricao: "➥ Após o envio dessa linha, o recruta DEVE ser postado como aprovado no formulário e no System no fim da aula, independente de ter caído ou saído da sala." },
+                    { texto: "Agora coloque uma boina preta.", descricao: "➥ Espere o recruta colocar a sua boina para enviar a próxima mensagem." },
+                    { texto: "Com exceção do cinto com pistola, os demais acessórios só são permitidos a partir de sargento." },
+                    { texto: "Escreva em sua missão: [RCC] Soldado [SUA TAG]", descricao: "➥ Espere o recruta colocar a sua missão corretamente para enviar a próxima mensagem." },
+                    { texto: "Quando você quiser voltar a RCC após ter saído do jogo, procure em seu navegador de quartos por: RCC" },
+                    { texto: "Os quartos de nossa polícia irão aparecer e basta você clicar no batalhão que estiver aberto."},
+                    { texto: "Lembre-se que presença no batalhão é essencial para sua carreira militar e para ser promovido." },
+                    { texto: "Ademais, alerto que, não se retire do grupo oficial da Polícia RCC. Na ausência de vínculos com" },
+                    { texto: "a instituição, a sua instrução inicial pode ser reprovada." },
+                    { texto: "Alguma dúvida?" },
+                    { texto: "Aguarde, irei postar a instrução.", descricao: "➥ Vá para o tópico POSTAGEM." },
+
+            ],
+                POSTAGEM: [
+                { link: "https://system.policercc.com.br/requerimentos/instrucao_inicial", titulo: "Poste sua aula no System clicando aqui." },
+                { link: "SEM LINK", titulo: "Lembre-se de clicar no forms antes de começar a sua aula. Se não clicou, dá uma passadinha lá no fórum."}
+                
+                ]
+            },
+            CFC1: {
+                
+                INTRODUCAO: [
+                { texto: "Olá, sou o(a) instrutor(a) que irá lhe aplicar o Curso de Formação de Cabos, parte 01." },
+                { texto: "Nele você aprenderá mais a fundo sobre a polícia, o batalhão e as suas funções." },
+                { texto: "Se eu sair do jogo, me aguarde 5 minutos e caso eu não retorne, volte para o batalhão." },
+                { texto: "Você prefere o método clássico (script enviado aqui) ou a opção mais prática via slide?", descricao: "➥ Vá para o tópico PELO JOGO ou PELO SLIDE de acordo com a escolha do aluno." },
+                ],
+                
+                JOGO: [
+                    { texto: "[REGRAS BÁSICAS DA RCC]" },
+                    { texto: "Como sabe, na RCC existem várias regras, algumas delas são:" },
+                { texto: "1. Ser fiel à polícia RCC, nunca trabalhar em duas polícias ao mesmo tempo;" },
+                { texto: "2. Deve permanecer com o perfil em modo online e visível para todo mundo;" },
+                { texto: "3. Não deixar o seu habbo inativo em funções, sala de estado ou corredor principal;" },
+                { texto: "4. Entrar nas dependências da RCC sempre com os requisitos obrigatórios, sem utilizar efeitos" },
+                { texto: "e/ou sem utilizar um visual não permitido perante a documentação;" },
+                { texto: "5. É proibido fugir de atividades, pedir promoção/gratificação e ter duas contas na instituição;" },
+                { texto: "6. Respeitar todos, sejam civis, subalternos ou superiores;" },
+                { texto: "7. Sempre obedecer às ordens de seus superiores, sendo justas ou injustas." },
+                { texto: "Em caso de injustas, ao acatá-la, você deverá printar e após isso, recorra a um superior." },
+                { texto: "<hr>[FUNÇÕES DO BATALHÃO]", descricao: "➥ Dirija-se na sala a função cujo está sendo explicada para facilitar o entendimento do cabo" },
+                { texto: "Existem 7 funções no batalhão as quais poderá assumir ao longo da sua carreira, sendo elas:" },
+                { texto: "Recepcionista, Operadores, Auxiliar Operacional, Sentinela," },
+                { texto: "Oficial da Guarda, Cabo da Guarda e Auxiliar do Cabo da Guarda." },
+                { texto: "Operadores (OP) - Situam-se na sala de controle, onde estão as alavancas e os rollers no batalhão." },
+                { texto: "Têm função de liberar a entrada de policiais ao batalhão e, por segurança, são divididos em 4:" },
+                { texto: "OP 1: confere a farda, missão e o grupo que o policial usa naquele momento." },
+                { texto: "OP 2: checar o perfil/visibilidade do perfil, se há número nas costas e se o balão de fala é branco." },
+                { texto: "OP 3: confere a TAG, se os cursos do policial constam no System e libera a entrada para o batalhão." },
+                { texto: "Em casos de militares condecorados com a medalha de honra," },
+                { texto: "conferir se o policial consta na listagem de condecorados no System." },
+                { texto: "OP 4: confere se os recrutas são exonerados, se estão com a visibilidade do perfil habilitada," },
+                { texto: "se constam como policiais da ativa e se estão com os procedimentos corretos." },
+                { texto: "Para abrir as portas dos OP1, OP2, OP3 ou OP4, digite: porta1, porta2, porta3 e porta4." },
+                { texto: "Para kikar o recruta, digite: Pkike. Vale lembrar que o comando 'Pkike' só funciona no OP4." },
+                { texto: "Sentinela - Policial cuja função é aplicar uma pré-aula aos Recrutas na área de recrutas." },
+                { texto: "Ele deve ensinar os Recrutas acerca da história da RCC, formas de tratamento e comandos." },
+                { texto: "Também tem como funções abrir a porta para o Corredor dos INS e alertar ao Oficial da Guarda" },
+                { texto: "quando completar 2 recrutas presentes ou 05 minutos de pré-aula." },
+                { texto: "Há um sistema que faz com que o bot que se encontra na área dos recrutas faça a contagem do tempo." },
+                { texto: "Por isso, assim que chegar um primeiro recruta, utilize o comando: iniciartempo" },
+                { texto: "Caso alguma pré-aula termine antes de completar os 05 minutos, utilize o comando 'zerartempo'." },
+                { texto: "É necessário o uso da cor cinza no balão de fala quando nesta função." },
+                { texto: "É estritamente proibido usar script's ou modelos na função do sentinela, utilize o seu conhecimento." },
+                { texto: "Para liberar o acesso ao Corredor dos INS digite porta5." },
+                { texto: "No batalhão auxiliar, o Operador 1 ficará responsável pelas funções do Operador 1 e Operador 2," },
+                { texto: "enquanto o segundo operador fica com o papel originalmente do Operador 3." },
+                { texto: "Além disso, o sentinela passa a ter o papel de Operador 4, conferindo os recrutas que chegam lá." },
+                { texto: "Ainda, vale lembrar que o tempo de espera para a aula inicial é de 5 minutos." },
+                { texto: "Alguma dúvida sobre o conteúdo passado?", descricao: "➥ Retome o script no tópico FINALIZAÇÃO" },
+                    
+                ],
+                SLIDE: [
+                    { texto: "Acesse o seguinte link: bit.l4/CFC1-ins (troque '4' por 'y');" },
+                    { texto: "Siga as instruções dele até o final. Se tiver qualquer dúvida, retorne e diga." },
+                    { texto: "Evite dormir. Caso fique +4 minutos ausente, envie um balão de fala branco. Pode começar a leitura.", descricao: "➥ Aguarde o cabo avisar que finalizou a leitura para dar seguimento" },
+                    { texto: "Acesse o seguinte link: bit.l4/CFC1-ins (troque '4' por 'y');Alguma dúvida diante de todo o conteúdo que foi passado pelo slide?", descricao: "➥ Retome o script no tópico FINALIZAÇÃO." },
+                    { texto: "Acesse o seguinte link: bit.l4/CFC1-ins (troque '4' por 'y');" },
+                ],
+
+                FINALIZACAO: [
+                { texto: "[TESTE TEÓRICO]" },
+                { texto: "Agora irei fazer algumas perguntas relacionadas à aula. Caso erre duas questões, será reprovado(a).", descricao: "➥ Caso o cabo atinja a quantidade de erros, deverá ser reprovado imediatamente. Caso tenha outros, aguarde o reprovado retirar-se para dar continuidade" },
+                { texto: "Cliquem em mim e apertem em 'Sussurro'. Feito isso, enviem-me uma mensagem." },
+                { texto: "Todas as respostas deverão ser enviadas via sussurro.", descricao: "➥ Caso haja mais de um cabo presente" },
+                { texto: "01 - Quantas e quais são as funções no batalhão da RCC? (Sem abreviar ou usar siglas)", descricao: "R: 7 funções. Recepcionista, Operadores, Auxiliar Operacional, Sentinela, Oficial da Guarda, Cabo da Guarda e Auxiliar do Cabo da Guarda." },
+                { texto: "02 - Quais são as funções dos operadores 1 e 2?", descricao: "R: OP1: confere a farda, missão e o grupo que o policial usa naquele momento. OP2: confere o perfil, se não há número nas costas e se o balão de fala está branco." },
+                { texto: "03 - Quais são as funções dos operadores 3 e 4?", descricao: "R: OP3: confere a TAG, se os cursos do policial constam no System e libera a entrada para o batalhão. Em casos de Militar condecorados com a medalha de honra, conferir se o policial consta na listagem de condecorados no System. OP4: confere se os recrutas são exonerados, se estão com a visibilidade do perfil habilitada, se constam como policiais da ativa e se estão com os procedimentos corretos." },
+                { texto: "04 - Quais os comandos para abrir as portas dos operadores? Como expulsar enquanto OP4?", descricao: "R: porta1, porta2, porta3, porta4 e Pkike para expulsar." },
+                { texto: "05 - Qual a principal função do sentinela? E quais os três comandos utilizados por ele?", descricao: "R: Aplicar uma pré-aula aos Recrutas na sala de espera. Porta5 / iniciartempo / zerartempo" },
+                { texto: "06 - No Batalhão Auxiliar, qual função adicional é realizada pelo sentinela?", descricao: "R: O sentinela passa a ser responsável também por realizar as funções do operador 4." },
+                { texto: "<hr>Lamento, você está reprovado(a). Mas não desista, retorne ao batalhão, procure outro instrutor e" },
+                { texto: "faça novamente seu curso. Confio no seu potencial e sei que é capaz de ser aprovado(a).", descricao: "➥ AOS REPROVADOS NO TESTE TEÓRICO" },
+                { texto: "<hr>[FINALIZAÇÃO]" },
+                { texto: "Parabéns, você foi qualificado(a) na primeira parte do seu CFC." },
+                { texto: "Acrescente ao fim de sua missão, após a TAG de quem o promoveu: [CFC1]", descricao: "➥ Espere o militar realizar o procedimento para seguir o script" },
+                { texto: "Como Cabo, você tem grandes responsabilidades e deve ser exemplo para os soldados." },
+                { texto: "Deve manter a atenção e a agilidade em todas as funções que assume na RCC." },
+                { texto: "Aguarde, irei postar a instrução.", descricao: "➥ Caso o cabo queira continuar realizar a segunda parte do curso, após postar a primeira parte, acesse o Script de CFC II." },      
+            ],
+
+            POSTAGEM: [
+            { link: "https://system.policercc.com.br/companhia/instrutores", titulo: "Poste sua aula no System clicando aqui." },
+            { link: "SEM LINK", titulo: "Lembre-se de clicar no forms antes de começar a sua aula. Se não clicou, dá uma passadinha lá no fórum."}
+            ]
+            },
+            CFC2: {
+                INTRODUCAO: [
+                { texto: "Olá, sou o(a) instrutor(a) .Lord e irei lhe aplicar o Curso de Formação de Cabos, parte 02." },
+                { texto: "Nele você aprenderá mais a fundo sobre o System da RCC e os Grupos de Tarefas." },
+                { texto: "Se eu sair do jogo, me aguarde 5 minutos e caso eu não retorne, volte para o batalhão." },
+                { texto: "Você está pelo computador ou pelo mobile?", descricao: "➥ Siga de acordo com a escolha do aluno." },
+               
+                ],
+                JOGO: [
+                    { texto: "Caso não consiga dividir a tela, provavelmente, vai acabar tendo que reentrar no jogo." },
+                    { texto: "Por isso, o mais recomendável para ter um bom aproveitamento da aula pelo mobile, é que após" },
+                    { texto: "lhe passado o conteúdo, você o visualize sozinho e tente fazer os procedimentos conforme aprendido." },
+                    { texto: "Feito isso, já sabendo usar o System de forma simultânea ao jogo," },
+                    { texto: "chame um instrutor para a continuidade de sua aula.", descricao: "➥ Dê continuidade ao tópico PELO SLIDE e, caso o cabo caia da aula, realize a postagem apenas no formulário" }, 
+                ],
+                SLIDE: [
+                    { texto: "Acesse o seguinte link: bit.l4/CFC-ins2 (troque '4' por 'y');" },
+                    { texto: "Para encontrar o slide dessa aula, siga as seguintes instruções:" },
+                    { texto: "Siga as instruções dele até o final. Se tiver qualquer dúvida, retorne e diga." },
+                    { texto: "Evite dormir. Caso fique +4 minutos ausente, envie um balão de fala branco. Pode começar a leitura." },
+                    { texto: "Alguma dúvida diante da primeira parte do slide?", descricao: "➥ Aguarde o cabo finalizar a leitura do slide / O slide requisita ao cabo o envio do teste PRÁTICO, caso ele tenha feito, continue no teste TÉORICO no tópico FINALIZAÇÃO. Caso não, prossiga com o script normalmente." },   
+            ],
+                FINALIZACAO: [
+                { texto: "[TESTE PRÁTICO]" },
+                { texto: "Agora vamos realizar um teste prático com o RCCSystem. Por favor, abra-o e me avise." },
+                { texto: "Etapa 1: Copie e cole aqui a SUA IDENTIFICAÇÃ0, encontrada pelo buscar usuário ou na listagem.", descricao: "➥ Espere o(a) Cabo enviar a TAG, verifique-a e prossiga para a próxima etapa. Caso o(a) Cabo envie a TAG errada, auxilie-o(a)." },
+                { texto: "Etapa 2: Copie e cole aqui a MINHA IDENTIFICAÇÃO, encontrada pelo buscar usuário ou na listagem.", descricao: "➥ Espere o(a) Cabo enviar a TAG, verifique-a e prossiga para a próxima etapa. Caso o(a) Cabo envie a TAG errada, auxilie-o(a)." },
+                { texto: "Etapa 3: Copie e cole aqui um EXONERADO, encontrado na Listagem: Exonerados.", descricao: "➥ Espere o(a) Cabo enviar a TAG, verifique-a e prossiga para a próxima etapa. Caso o(a) Cabo envie a TAG errada, auxilie-o(a)." },
+                { texto: "Agora retorne a leitura do slide para que, posteriormente, realizarmos o teste teórico." },
+                { texto: "Siga as instruções dele até o final e, ao finalizar, informe-me.", descricao: "➥ Aguarde o cabo finalizar a leitura do slide" },
+                { texto: "Alguma dúvida diante de todo o conteúdo que foi passado pelo slide?" },
+                { texto: "[TESTE TEÓRICO]" },
+                { texto: "Agora irei fazer algumas perguntas relacionadas à aula. Caso erre duas questões, será reprovado(a).", descricao: "➥ Caso o cabo atinja a quantidade de erros, deverá ser reprovado imediatamente. Caso tenha outros, aguarde o reprovado retirar-se para dar continuidade." },
+                { texto: "Cliquem em mim e apertem em 'Sussurro'. Feito isso, enviem-me uma mensagem." },
+                { texto: "Todas as respostas deverão ser enviadas via sussurro.", descricao: "➥ Caso mais de um cabo esteja recebendo a aula" },
+                { texto: "01 - Quantas e quais são as companhias da RCC? (Sem abreviar ou usar siglas)", descricao: "R: 5. Instrutores de Treinamento, Treinadores, Supervisores, Professores e Escola de Formação de Executivos." },
+                { texto: "02 -  A partir de qual patente é obrigatório fazer parte de uma companhia para ser promovido?", descricao: "R: A partir de Sargento é obrigatório fazer parte de uma companhia para ser promovido." },
+                { texto: "03 - Quantas e quais são as subcompanhias da RCC? (Sem abreviar ou usar siglas)", descricao: "R: 9. Auditoria Fiscal, Centro de Formação de Oficiais, Centro de Recursos Humanos, Departamento de Comunicação, Esquadrão do Corpo Executivo, Setor de Relações Públicas, Ordem Militar, Organizadores de Rondas e Centro de Elitização Militar." },
+                { texto: "04 - Como cabo você pode fazer parte de quais subcompanhias? (Sem abreviar ou usar siglas)", descricao: "R: Como cabo é possível fazer parte da Ordem Militar, Departamento de Comunicação e dos Organizadores de Rondas." },
+                { texto: "05 - Em qual caso o praça pode realizar a Mediação Hierárquica e quem deve procurar caso necessite?", descricao: "R: Caso dobre os dias mínimos em sua patente, basta procurar um membro do Centro de Elitização Militar." },
+                { texto: "Lamento, você está reprovado(a). Mas não desista, retorne ao batalhão, procure outro instrutor e" },
+                { texto: "faça novamente seu curso. Confio no seu potencial e sei que é capaz de ser aprovado(a).", descricao: "➥ AOS REPROVADOS NO TESTE TEÓRICO:" },
+                { texto: "<hr>[FINALIZAÇÃO]" },
+                { texto: "Parabéns, você foi qualificado(a) no Curso de Formação de Cabos (CFC)." },
+                { texto: "Altere sua missão e troque [CFC1] por [CFC].", descricao: "➥ Espere o militar realizar o procedimento para seguir o script" },
+                { texto: "Agora que concluiu o CFC, procure um supervisor (brevê verde) para obter a SEG." },
+                { texto: "Acesse o seguinte link: bit.l4/apostila-CFC2 (Troque '4' por 'y')" },
+                { texto: "Nesse slide você irá encontrar mais informações sobre todas as companhias e subcompanhias." },
+                { texto: "Sua leitura é de extrema importância, leia após o término da aula." },
+                { texto: "Aguarde, irei postar a instrução.", descricao: "➥ Vá para o tópico POSTAGEM." },
+                ],
+
+                POSTAGEM: [
+                { link: "https://system.policercc.com.br/companhia/instrutores", titulo: "Poste sua aula no System clicando aqui." },
+            { link: "SEM LINK", titulo: "Lembre-se de clicar no forms antes de começar a sua aula. Se não clicou, dá uma passadinha lá no fórum."}
+                ]
+            }
+        };
+
+        var seletor = document.getElementById("seletor");
+        var tipoConteudo = document.getElementById("tipoConteudo");
+        var textoDiv = document.getElementById("texto");
+
+        seletor.addEventListener("change", function() {
+            var opcaoSelecionada = this.value;
+            var tipoSelecionado = tipoConteudo.value;
+            var texto = scripts[opcaoSelecionada][tipoSelecionado];
+            adicionarTexto(texto);
+        });
+
+        tipoConteudo.addEventListener("change", function() {
+            var opcaoSelecionada = seletor.value;
+            var tipoSelecionado = this.value;
+            var texto = scripts[opcaoSelecionada][tipoSelecionado];
+            adicionarTexto(texto);
+        });
+
+        document.getElementById('ok-button').addEventListener('click', function() {
+            document.getElementById('welcome-card').style.display = 'none';
+        });
+        
+        function adicionarLink(link, titulo) {
+    return "<a href='" + link + "' target='_blank'>" + (titulo ? titulo : link) + "</a>";
+}
+
+function updateTime() {
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+
+    hours = ("0" + hours).slice(-2);
+    minutes = ("0" + minutes).slice(-2);
+    seconds = ("0" + seconds).slice(-2);
+
+    document.getElementById('clock').textContent = hours + ":" + minutes + ":" + seconds;
+
+    setTimeout(updateTime, 1000);
+}
+
+window.onload = updateTime;
+
+
+function adicionarTexto(texto) {
+    var html = "";
+    texto.forEach(function(item) {
+        if (item.texto) {
+            html += "<div class='linha-texto'><span class='texto-principal'>" + item.texto + "</span><button class='botao-copiar' onclick='copiarTexto(this)'>Copiar</button><div class='descricao'>" + (item.descricao ? item.descricao : "") + "</div></div>";
+        } else if (item.link) {
+            html += "<div class='linha-texto'>" + adicionarLink(item.link, item.titulo) + "</div>";
+        }
+    });
+    textoDiv.innerHTML = html;
+}
+
+
+        function copiarTexto(botao) {
+            var texto = botao.previousElementSibling.textContent;
+            navigator.clipboard.writeText(texto)
+                .then(function() {
+                    botao.innerHTML = "Copiado!";
+                    setTimeout(function() {
+                        botao.innerHTML = "Copiar";
+                    }, 1000);
+                })
+                .catch(function(error) {
+                    console.error('Erro ao copiar texto:', error);
+                });
+        }
+    </script>
+</body>
+</html>
